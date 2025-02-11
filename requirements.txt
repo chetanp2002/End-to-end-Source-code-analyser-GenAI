@@ -10,3 +10,4 @@ langchain-community
 langchain_huggingface
 langchain_groq
 markdown2
+gunicorn
