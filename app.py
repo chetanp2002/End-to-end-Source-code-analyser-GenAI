@@ -62,11 +62,24 @@ def chat():
 
     if input == "clear":
         os.system("rm -rf repo")
+        # os.system("rm -rf ./db")
 
     result = qa(input)
     print(result['answer'])
     output= markdown2.markdown(result["answer"])
     return output
+
+    # msg = request.form["msg"]
+    # input = msg
+    # print(input)
+
+    # if input == "clear":
+    #     os.system("rm -rf repo")
+
+    # result = qa(input)
+    # print(result['answer'])
+    # output= markdown2.markdown(result["answer"])
+    # return output
 
 
 if __name__ == '__main__':

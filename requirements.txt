@@ -9,5 +9,6 @@ ipykernel
 langchain-community
 langchain_huggingface
 langchain_groq
+langchain_ollama
 markdown2
 gunicorn
