@@ -13,10 +13,39 @@ os.environ['HF_TOKEN']= HF_TOKEN
 
 
 #clone any github repositories 
+import os
+import shutil
+import psutil
+from git import Repo
+
+def close_file_handles(path):
+    """Close processes locking files in the given directory."""
+    for proc in psutil.process_iter(['pid', 'name']):
+        try:
+            for open_file in proc.open_files():
+                if path in open_file.path:
+                    print(f"Killing process {proc.info['name']} (PID: {proc.info['pid']})")
+                    proc.kill()
+        except (psutil.AccessDenied, psutil.NoSuchProcess):
+            continue
+
 def repo_ingestion(repo_url):
-    os.makedirs("repo", exist_ok=True)
     repo_path = "repo/"
+    
+    # Ensure the repo folder is deleted completely
+    if os.path.exists(repo_path):
+        print("Attempting to delete existing repo...")
+        close_file_handles(repo_path)
+        shutil.rmtree(repo_path, ignore_errors=False)
+        print(f"Deleted existing '{repo_path}' directory.")
+    
+    os.makedirs(repo_path, exist_ok=True)
+    
+    print(f"Cloning repository from {repo_url} into '{repo_path}'...")
     Repo.clone_from(repo_url, to_path=repo_path)
+    print("Repository cloned successfully.")
+
+
 
 
 
