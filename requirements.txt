@@ -1,0 +1,12 @@
+openai
+tiktoken
+chromadb
+langchain
+flask
+GitPython
+python-dotenv
+ipykernel
+langchain-community
+langchain_huggingface
+langchain_groq
+markdown2
